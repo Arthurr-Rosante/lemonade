@@ -3,13 +3,33 @@
   "version": "1.0.0",
   "description": "lemonade is a cli tool that allows you to automatically delete files from the %temp% folder of your pc",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "lemonade": "dist/index.js"
   },
   "keywords": [
     "cli",
-    "clean-tool"
+    "clean-tool",
+    "node",
+    "typescript"
   ],
   "author": "Arthurr Rosante",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "fs-extra": "^11.3.0",
+    "node-schedule": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.5",
+    "@types/node": "^22.13.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
 }
