@@ -11,7 +11,6 @@
      - **--days (-d)**: list of days of the week [0-6]
      - **--hour (-h)**: in which hour to clean [0-23]
      - **--default**: sets a schedule to a default config
-     - **[required] --save (-s)**: saves the schedule configuration
 
 3. **activate**: activates the specified schedule.
 
