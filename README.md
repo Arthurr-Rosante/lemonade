@@ -2,30 +2,35 @@
 
 ### Commands/Features
 
-1. **clean**: deletes all files in `%temp%` folder.
+1. **clean**: empties the folder by excluding all existing files. If no folder
+   is specified, cleans the `%temp%` folder by default.
 
-2. **schedule**: schedules an automatic cleanup function.
+- **--path, -p [folder_path]**: executes the `clean` command in the specified folder.
+- **--name, -n [name]**: executes the `clean` command in the matching folder set by the `set` command.
+- **--log, -l**: logs the results of the cleaning operation.
 
-   - flags:
-     - **--name (-n)**: name of the schedule
-     - **--days (-d)**: list of days of the week [0-6]
-     - **--hour (-h)**: in which hour to clean [0-23]
-     - **--default**: sets a schedule to a default config
+---
 
-3. **activate**: activates the specified schedule.
+2. **set**: creates a configuration that receives a name and can be called by the `clean` command through `lemonade clean -n <name>`
 
-   - flags:
-     - **[required] --name (-n)**: name of the schedule to be activated
+- **--name, -n <name> (required!)**: saves the configuration with the specified name.
+- **--path, -p <path> (required!)**: saves the configuration with the specified path.
+- **--default, -D**: saves the configuration as the new default folder called by `lemonade clean`.
 
-4. **deactivate**: deactivates the specified schedule.
+---
 
-- flags:
-  - **[required] --name (-n)**: name of the schedule to be deactivated
+3. **remove | rm**: removes a configuration setted by the `set` command.
 
-5. **remove (rm)**:
+- **--name, -n <name> (required!)**: removes the configuration with the specified name.
 
-   - **[required] --name (-n)**: name of the schedule to be removed
+---
 
-6. **list**: lists all the saved schedule configurations.
+4. **list**: logs a lists of the saved configurations and shows which one is active at the time.
 
-7. **--help**: lists all the commands available for the cli
+---
+
+5. **root**: logs the path to the `lemonade-cli` folder.
+
+- **--list, -l**: logs the path to the JSON file containing all the saved configurations.
+
+---
