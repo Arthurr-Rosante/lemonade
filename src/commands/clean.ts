@@ -3,9 +3,13 @@ import fse from "fs-extra";
 import chalk from "chalk";
 import path from "path";
 import { CleanOpts, IError, Status } from "../types.js";
+import {
+  CONFIG_FILE,
+  ensureConfigFile,
+  TEMP_FOLDER,
+} from "../configs/config.js";
 
 const clean = new Command("clean");
-const TEMP_FOLDER = process.env.TEMP!;
 
 clean.description(
   `empties the folder by excluding all existing files. If no folder
@@ -32,11 +36,11 @@ clean.action(async function (this: Command) {
   const status: Status = { cleaned: [], skipped: [] };
 
   try {
+    ensureConfigFile();
+    const configs = JSON.parse(fse.readFileSync(CONFIG_FILE, "utf-8"));
+
     if (!opts.path) {
       opts.path = TEMP_FOLDER;
-
-      /* [!IMPORTANT!]: Remember to possibly alter the dynamics between Name and Path, since there's a way to make them both interchangeable.
-       */
     } else if (Array.isArray(opts.path)) {
       const fullPath = opts.path?.join(" ");
       opts.path = fullPath;
