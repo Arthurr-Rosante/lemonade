@@ -2,7 +2,7 @@ import { Command } from "commander";
 import fse from "fs-extra";
 import chalk from "chalk";
 import path from "path";
-import { CleanOpts, IError, Status } from "../types.js";
+import { CleanOpts, Config, IError, Status } from "../types.js";
 import {
   CONFIG_FILE,
   ensureConfigFile,
@@ -22,12 +22,12 @@ clean.option(
   `executes the ${chalk.inverse("clean")} command in the specified folder.`
 );
 // === Name - Argument | Optional ===
-// clean.option(
-//   "-n, --name <name>",
-//   `executes the ${chalk.inverse(
-//     "clean"
-//   )} command in the matching folder set by the ${chalk.inverse("set")} command.`
-// );
+clean.option(
+  "-n, --name <name>",
+  `executes the ${chalk.inverse(
+    "clean"
+  )} command in the matching folder set by the ${chalk.inverse("set")} command.`
+);
 // === Log - Flag | Optional ===
 clean.option("-l, --log", "logs the results of the cleaning operation");
 
@@ -37,13 +37,22 @@ clean.action(async function (this: Command) {
 
   try {
     ensureConfigFile();
-    const configs = JSON.parse(fse.readFileSync(CONFIG_FILE, "utf-8"));
+    const configs: Config[] = JSON.parse(
+      fse.readFileSync(CONFIG_FILE, "utf-8")
+    );
 
     if (!opts.path) {
-      opts.path = TEMP_FOLDER;
-    } else if (Array.isArray(opts.path)) {
-      const fullPath = opts.path?.join(" ");
-      opts.path = fullPath;
+      const path = configs.find((config) => config.name === "base")?.path;
+      if (path) {
+        opts.path = path;
+      }
+    } else if (!opts.path && opts.name) {
+      const path = configs.find((config) => config.name === opts.name)?.path;
+      if (path) {
+        opts.path = path;
+      }
+    } else {
+      opts.path = opts.path;
     }
 
     const files = await fse.readdir(opts.path);

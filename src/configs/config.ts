@@ -1,6 +1,7 @@
 import path from "path";
 import os from "os";
 import fse from "fs-extra";
+import { Config } from "../types.js";
 
 export const TEMP_FOLDER = process.env.TEMP!;
 
@@ -20,16 +21,25 @@ export const ensureConfigFile = () => {
     fse.writeFileSync(
       CONFIG_FILE,
       JSON.stringify(
-        {
-          id: 1,
-          name: "base",
-          path: TEMP_FOLDER,
-          active: true,
-        },
+        [
+          {
+            id: 1,
+            name: "base",
+            path: TEMP_FOLDER,
+            active: true,
+          },
+        ],
         null,
         2
       ),
       "utf-8"
     );
   }
+};
+
+export const verifyConfigExists = (configs: Config[], name: string) => {
+  if (configs.some((config) => config.name === name)) {
+    return true;
+  }
+  return false;
 };

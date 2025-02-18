@@ -5,10 +5,17 @@ export interface IError {
   path: string;
 }
 
+export interface Config {
+  id: number;
+  name: string;
+  path: string;
+  active: boolean;
+}
+
 export interface CleanOpts {
   log?: boolean;
   path?: string | string[];
-  // name?: string;
+  name?: string;
 }
 
 export type Status = {
