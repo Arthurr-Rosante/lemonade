@@ -3,11 +3,7 @@ import fse from "fs-extra";
 import chalk from "chalk";
 import path from "path";
 import { CleanOpts, Config, IError, Status } from "../types.js";
-import {
-  CONFIG_FILE,
-  ensureConfigFile,
-  TEMP_FOLDER,
-} from "../configs/config.js";
+import { CONFIG_FILE, ensureConfigFile } from "../utils/config.js";
 
 const clean = new Command("clean");
 
@@ -49,10 +45,15 @@ clean.action(async function (this: Command) {
       const config = configs.find((config) => config.name === opts.name);
       if (!config) throw new Error(`${opts.name} - Config does not exist.`);
       opts.path = config.path;
-    } else if (opts.path && !opts.name) {
-      opts.path = opts.path;
+    } else if (Array.isArray(opts.path) && !opts.name) {
+      const fullPath = opts.path?.join(" ");
+      opts.path = fullPath;
+    } else if (opts.path && opts.name) {
+      const config = configs.find((config) => config.name === opts.name);
+      if (!config) throw new Error(`${opts.name} - Config does not exist.`);
+      Array.isArray(opts.path) ? (opts.path = opts.path?.join(" ")) : opts.path;
     } else {
-      // opts.path = TEMP_FOLDER;
+      throw new Error("Invalid arguments");
     }
 
     const files = await fse.readdir(opts.path as string);

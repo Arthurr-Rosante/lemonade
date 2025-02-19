@@ -22,3 +22,9 @@ export type Status = {
   cleaned: string[];
   skipped: string[];
 };
+
+export interface SetOpts {
+  name: string;
+  path: string | string[];
+  default: boolean;
+}

@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { listConfigs, printRootFolder } from "../configs/config.js";
+import { listConfigs, printRootFolder } from "../utils/config.js";
 
 const list = new Command("list");
 
