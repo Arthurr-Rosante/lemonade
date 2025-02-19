@@ -41,23 +41,23 @@ clean.action(async function (this: Command) {
       fse.readFileSync(CONFIG_FILE, "utf-8")
     );
 
-    if (!opts.path) {
-      const path = configs.find((config) => config.name === "base")?.path;
-      if (path) {
-        opts.path = path;
-      }
+    if (!opts.path && !opts.name) {
+      const active = configs.find((config) => config.active === true);
+      if (!active) throw new Error("No default config set...");
+      opts.path = active.path;
     } else if (!opts.path && opts.name) {
-      const path = configs.find((config) => config.name === opts.name)?.path;
-      if (path) {
-        opts.path = path;
-      }
-    } else {
+      const config = configs.find((config) => config.name === opts.name);
+      if (!config) throw new Error(`${opts.name} - Config does not exist.`);
+      opts.path = config.path;
+    } else if (opts.path && !opts.name) {
       opts.path = opts.path;
+    } else {
+      // opts.path = TEMP_FOLDER;
     }
 
-    const files = await fse.readdir(opts.path);
+    const files = await fse.readdir(opts.path as string);
     for (const file of files) {
-      const fpath = path.join(opts.path, file);
+      const fpath = path.join(opts.path as string, file);
       try {
         await fse.remove(fpath);
         status.cleaned.push(fpath);
@@ -71,7 +71,7 @@ clean.action(async function (this: Command) {
     }
 
     opts.log
-      ? logResults(status, opts.path)
+      ? logResults(status, opts.path as string)
       : console.log(
           chalk.bold(
             "\n==================== | Summary | ==================== \n"

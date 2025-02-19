@@ -43,3 +43,13 @@ export const verifyConfigExists = (configs: Config[], name: string) => {
   }
   return false;
 };
+
+export const listConfigs = () => {
+  ensureConfigFile();
+  const configs: Config[] = JSON.parse(fse.readFileSync(CONFIG_FILE, "utf-8"));
+  return configs;
+};
+
+export const printRootFolder = () => {
+  return console.log("root: ", CONFIG_FOLDER);
+};
