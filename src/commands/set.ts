@@ -66,7 +66,7 @@ set.action(async function (this: Command) {
       ? console.log(`Default folder set to ${opts.name}`)
       : console.log(`Folder ${opts.name} saved successfully.`);
   } catch (error) {
-    console.error(error);
+    console.error(chalk.red((error as Error).message));
   }
 });
 

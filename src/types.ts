@@ -28,3 +28,7 @@ export interface SetOpts {
   path: string | string[];
   default: boolean;
 }
+
+export interface RemoveOpts {
+  name: string;
+}
