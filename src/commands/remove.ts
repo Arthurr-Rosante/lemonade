@@ -10,8 +10,10 @@ remove.description(
   `removes a configuration setted by the ${chalk.inverse("set")} command.`
 );
 
+// === RM - Alias ===
 remove.alias("rm");
 
+// === Name - Argument | Required ===
 remove.requiredOption(
   "-n, --name <name>",
   "removes the configuration with the specified name."

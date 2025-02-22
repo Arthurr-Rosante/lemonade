@@ -12,14 +12,19 @@ set.description(
   )} command through ${chalk.inverse("lemonade clean -n <name>")}`
 );
 
+// === Name - Argument | Required ===
 set.requiredOption(
   "-n, --name <name>",
   "saves the configuration with the specified name."
 );
+
+// === Path - Argument | Required ===
 set.requiredOption(
   "-p, --path <folder_path...>",
   "saves the configuration with the specified path."
 );
+
+// === Default - Argument | Optional ===
 set.option(
   "-D, --default",
   `saves the configuration as the new default folder called by ${chalk.inverse(

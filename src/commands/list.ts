@@ -7,6 +7,7 @@ list.description(
   "logs a lists of the saved configurations and shows which one is active at the time."
 );
 
+// === Root - Argument | Optional ===
 list.option(
   "-r, --root",
   "logs the path to the folder containing the configurations.",
