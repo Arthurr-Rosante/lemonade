@@ -1,41 +1,24 @@
 import chalk from "chalk";
 import fse from "fs-extra";
 import { Command } from "commander";
-import { Config, SetOpts } from "../types.js";
 import { CONFIG_FILE, ensureConfigFile } from "../utils/config.js";
+import { Config } from "../types.js";
 
 const set = new Command("set");
 
 set.description(
-  `creates a configuration that receives a name and can be called by the ${chalk.inverse(
-    "clean"
-  )} command through ${chalk.inverse("lemonade clean -n <name>")}`
+  `Sets the default configuration to be called by the ${chalk.inverse(
+    "lemonade clean"
+  )} command.`
 );
 
-// === Name - Argument | Required ===
 set.requiredOption(
   "-n, --name <name>",
-  "saves the configuration with the specified name."
-);
-
-// === Path - Argument | Required ===
-set.requiredOption(
-  "-p, --path <folder_path...>",
-  "saves the configuration with the specified path."
-);
-
-// === Default - Argument | Optional ===
-set.option(
-  "-D, --default",
-  `saves the configuration as the new default folder called by ${chalk.inverse(
-    "lemonade clean"
-  )}`,
-  false
+  "name of the configuration you want to default."
 );
 
 set.action(async function (this: Command) {
-  const opts = this.opts<SetOpts>();
-  Array.isArray(opts.path) ? (opts.path = opts.path?.join(" ")) : opts.path;
+  const { name }: { name: string } = this.opts();
 
   try {
     ensureConfigFile();
@@ -43,33 +26,24 @@ set.action(async function (this: Command) {
       fse.readFileSync(CONFIG_FILE, "utf-8")
     );
 
-    if (configs.some((config) => config.name === opts.name)) {
-      throw new Error(`${opts.name} - Config already exists.`);
+    if (configs.some((config) => config.name === name)) {
+      fse.writeFileSync(
+        CONFIG_FILE,
+        JSON.stringify(
+          configs.map((config) => ({
+            ...config,
+            active: config.name === name,
+          })),
+          null,
+          2
+        ),
+        "utf-8"
+      );
+
+      console.log(chalk.green(`${name} - Config set as default.`));
+    } else {
+      throw new Error(`${name} - Config doesn't exist.`);
     }
-
-    fse.writeFileSync(
-      CONFIG_FILE,
-      JSON.stringify(
-        [
-          ...(opts.default
-            ? configs.map((config) => ({ ...config, active: false }))
-            : configs),
-          {
-            id: configs.length + 1,
-            name: opts.name,
-            path: opts.path,
-            active: opts.default,
-          },
-        ],
-        null,
-        2
-      ),
-      "utf-8"
-    );
-
-    opts.default
-      ? console.log(`Default folder set to ${opts.name}`)
-      : console.log(`Folder ${opts.name} saved successfully.`);
   } catch (error) {
     console.error(chalk.red((error as Error).message));
   }

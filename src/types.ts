@@ -23,7 +23,7 @@ export type Status = {
   skipped: string[];
 };
 
-export interface SetOpts {
+export interface AddOpts {
   name: string;
   path: string | string[];
   default: boolean;

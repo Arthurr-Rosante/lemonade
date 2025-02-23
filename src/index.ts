@@ -4,8 +4,9 @@ import { Command } from "commander";
 import { displayLogo } from "./utils/displayLogo.js";
 import clean from "./commands/clean.js";
 import list from "./commands/list.js";
-import set from "./commands/set.js";
+import add from "./commands/add.js";
 import remove from "./commands/remove.js";
+import set from "./commands/set.js";
 
 const program = new Command("lemonade")
   .description("A CLI tool for cleaning temp files and scheduling tasks.")
@@ -13,8 +14,9 @@ const program = new Command("lemonade")
 
 program.addCommand(clean);
 program.addCommand(list);
-program.addCommand(set);
+program.addCommand(add);
 program.addCommand(remove);
+program.addCommand(set);
 
 if (!process.argv.slice(2).length) {
   displayLogo();
