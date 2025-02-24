@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Command } from "commander";
+import { Command} from 'commander';
 import { displayLogo } from "./utils/displayLogo.js";
 import clean from "./commands/clean.js";
 import list from "./commands/list.js";

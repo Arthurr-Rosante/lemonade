@@ -7,7 +7,7 @@ export const TEMP_FOLDER = process.env.TEMP!;
 
 export const CONFIG_FOLDER = path.join(
   process.env.APPDATA || path.join(os.homedir(), ".config"),
-  "lemonade-cli"
+  "lemonade"
 );
 
 export const CONFIG_FILE = path.join(CONFIG_FOLDER, "config.json");

@@ -1,5 +1,5 @@
 {
-  "name": "lemonade-cli",
+  "name": "lemonade",
   "version": "1.0.0",
   "description": "lemonade is a cli tool that allows you to automatically delete files from the %temp% folder of your pc",
   "keywords": [
@@ -26,6 +26,7 @@
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "fs-extra": "^11.3.0",
+    "lemonade": "link:..\\..\\..\\AppData\\Local\\pnpm\\global\\5\\node_modules\\lemonade",
     "node-schedule": "^2.1.1"
   },
   "devDependencies": {
@@ -34,5 +35,8 @@
     "@types/node": "^22.13.1",
     "@types/node-schedule": "^2.1.7",
     "typescript": "^5.7.3"
+  },
+  "pnpm": {
+    "overrides": {}
   }
 }

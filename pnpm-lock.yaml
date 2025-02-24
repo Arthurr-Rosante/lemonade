@@ -17,6 +17,9 @@ importers:
       fs-extra:
         specifier: ^11.3.0
         version: 11.3.0
+      lemonade:
+        specifier: link:..\..\..\AppData\Local\pnpm\global\5\node_modules\lemonade
+        version: link:../../../AppData/Local/pnpm/global/5/node_modules/lemonade
       node-schedule:
         specifier: ^2.1.1
         version: 2.1.1

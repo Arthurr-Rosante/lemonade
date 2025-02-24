@@ -29,7 +29,7 @@
 
 ---
 
-5. **root**: logs the path to the `lemonade-cli` folder.
+5. **root**: logs the path to the `lemonade` folder.
 
 - **--list, -l**: logs the path to the JSON file containing all the saved configurations.
 
