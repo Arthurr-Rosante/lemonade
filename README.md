@@ -11,7 +11,7 @@
 
 ---
 
-2. **set**: creates a configuration that receives a name and can be called by the `clean` command through `lemonade clean -n <name>`
+2. **add**: adds a configuration that receives a name and can be called by the `clean` command through `lemonade clean -n <name>`
 
 - **--name, -n <name> (required!)**: saves the configuration with the specified name.
 - **--path, -p <path> (required!)**: saves the configuration with the specified path.
@@ -25,12 +25,14 @@
 
 ---
 
-4. **list**: logs a lists of the saved configurations and shows which one is active at the time.
+4. **set**: sets the default configuration to be called by the `lemonade clean` command
+
+- **--name, -n <name> (required!)**: sets the configuration with the specified name.
 
 ---
 
-5. **root**: logs the path to the `lemonade` folder.
+5. **list**: lists saved configurations and shows which one is active.
 
-- **--list, -l**: logs the path to the JSON file containing all the saved configurations.
+- **--root, -r**: logs the path to the folder containing the configurations.
 
 ---

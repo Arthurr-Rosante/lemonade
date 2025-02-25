@@ -1,5 +1,5 @@
 {
-  "name": "lemonade",
+  "name": "lemonade-cli",
   "version": "1.0.0",
   "description": "lemonade is a cli tool that allows you to automatically delete files from the %temp% folder of your pc",
   "keywords": [
