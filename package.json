@@ -10,14 +10,14 @@
   ],
   "author": "Arthurr Rosante",
   "license": "ISC",
-  "main": "index.js",
+  "main": "bin/index.js",
   "type": "module",
   "bin": {
-    "lemonade": "./dist/index.js"
+    "lemonade": "bin/index.js"
   },
   "scripts": {
-    "clean": "if exist dist rmdir /s /q dist",
-    "build": "pnpm clean && tsc && xcopy /I src\\assets dist\\assets",
+    "clean": "if exist bin rmdir /s /q bin",
+    "build": "pnpm clean && tsc && xcopy /I src\\assets bin\\assets",
     "link": "pnpm build && pnpm link --global",
     "release": "pnpm build && npm publish",
     "dev": "tsc -w"
@@ -26,7 +26,6 @@
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "fs-extra": "^11.3.0",
-    "lemonade": "link:..\\..\\..\\AppData\\Local\\pnpm\\global\\5\\node_modules\\lemonade",
     "node-schedule": "^2.1.1"
   },
   "devDependencies": {
@@ -35,8 +34,5 @@
     "@types/node": "^22.13.1",
     "@types/node-schedule": "^2.1.7",
     "typescript": "^5.7.3"
-  },
-  "pnpm": {
-    "overrides": {}
   }
 }
