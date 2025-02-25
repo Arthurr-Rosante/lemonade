@@ -1,10 +1,13 @@
 import { Command } from "commander";
 import { listConfigs, printRootFolder } from "../utils/config.js";
+import chalk from "chalk";
 
 const list = new Command("list");
 
 list.description(
-  "logs a lists of the saved configurations and shows which one is active at the time."
+  `${chalk.hex("00ffb2")(
+    ">_"
+  )} lists saved configurations and shows which one is active.`
 );
 
 // === Root - Argument | Optional ===

@@ -7,7 +7,9 @@ import { CONFIG_FILE, ensureConfigFile } from "../utils/config.js";
 const remove = new Command("remove");
 
 remove.description(
-  `removes a configuration setted by the ${chalk.inverse("set")} command.`
+  `${chalk.hex("00ffb2")(
+    ">_"
+  )} removes a configuration setted by the ${chalk.greenBright("set")} command.`
 );
 
 // === RM - Alias ===
@@ -28,7 +30,10 @@ remove.action(async function (this: Command) {
     );
 
     if (!configs.some((config) => config.name === opts.name)) {
-      throw new Error(`${opts.name} - Config not found.`);
+      throw new Error(
+        chalk.bold.red("✖. Error: ") +
+          chalk.redBright(`Configuration "${opts.name}" not found.`)
+      );
     }
 
     const selectedConfig = configs.find(
@@ -46,9 +51,16 @@ remove.action(async function (this: Command) {
     }
 
     fse.writeFileSync(CONFIG_FILE, JSON.stringify(updatedConfigs, null, 2));
-    console.log(chalk.green(`${opts.name} - Config removed successfully.`));
+
+    console.log(
+      chalk.green("✔ Success: ") +
+        chalk.greenBright(`Configuration "${opts.name}" removed successfully.`)
+    );
   } catch (error) {
-    console.error(chalk.red((error as Error).message));
+    console.error(
+      chalk.bold.red("✖ An error occurred: ") +
+        chalk.redBright((error as Error).message)
+    );
   }
 });
 

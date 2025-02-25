@@ -51,5 +51,5 @@ export const listConfigs = () => {
 };
 
 export const printRootFolder = () => {
-  return console.log("root: ", CONFIG_FOLDER);
+  return console.log("📂 root: ", CONFIG_FOLDER);
 };

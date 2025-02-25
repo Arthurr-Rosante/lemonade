@@ -7,7 +7,9 @@ import { Config } from "../types.js";
 const set = new Command("set");
 
 set.description(
-  `Sets the default configuration to be called by the ${chalk.inverse(
+  `${chalk.hex("00ffb2")(
+    ">_"
+  )} sets the default configuration to be called by the ${chalk.greenBright(
     "lemonade clean"
   )} command.`
 );
@@ -40,12 +42,23 @@ set.action(async function (this: Command) {
         "utf-8"
       );
 
-      console.log(chalk.green(`${name} - Config set as default.`));
+      console.log(
+        chalk.green("✔ Success: ") +
+          chalk.greenBright(
+            `"${name}" has been set as the default configuration.`
+          )
+      );
     } else {
-      throw new Error(`${name} - Config doesn't exist.`);
+      throw new Error(
+        chalk.bold.red("✖ Error: ") +
+          chalk.redBright(`Configuration "${name}" does not exist.`)
+      );
     }
   } catch (error) {
-    console.error(chalk.red((error as Error).message));
+    console.error(
+      chalk.bold.red("✖ An error occurred: ") +
+        chalk.redBright((error as Error).message)
+    );
   }
 });
 

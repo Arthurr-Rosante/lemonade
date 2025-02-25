@@ -7,9 +7,11 @@ import { CONFIG_FILE, ensureConfigFile } from "../utils/config.js";
 const add = new Command("add");
 
 add.description(
-  `creates a configuration that receives a name and can be called by the ${chalk.inverse(
-    "clean"
-  )} command through ${chalk.inverse("lemonade clean -n <name>")}`
+  `${chalk.hex("00ffb2")(
+    ">_"
+  )} adds a configuration that can be called by ${chalk.greenBright(
+    "lemonade clean -n <name>"
+  )}`
 );
 
 // === Name - Argument | Required ===
@@ -27,7 +29,7 @@ add.requiredOption(
 // === Default - Argument | Optional ===
 add.option(
   "-D, --default",
-  `saves the configuration as the new default folder called by ${chalk.inverse(
+  `saves the configuration as the new default folder called by ${chalk.greenBright(
     "lemonade clean"
   )}`,
   false
@@ -44,7 +46,10 @@ add.action(async function (this: Command) {
     );
 
     if (configs.some((config) => config.name === opts.name)) {
-      throw new Error(`${opts.name} - Config already exists.`);
+      throw new Error(
+        chalk.bold.red("✖. Error: ") +
+          chalk.redBright(`The configuration "${opts.name}" already exists.`)
+      );
     }
 
     fse.writeFileSync(
@@ -68,10 +73,19 @@ add.action(async function (this: Command) {
     );
 
     opts.default
-      ? console.log(`Default folder set to ${opts.name}`)
-      : console.log(`Folder ${opts.name} saved successfully.`);
+      ? console.log(
+          chalk.green("✔. Success: ") +
+            chalk.greenBright(`"${opts.name}" - created as the default folder.`)
+        )
+      : console.log(
+          chalk.green("✔. Success: ") +
+            chalk.greenBright(`"${opts.name}" - folder saved successfully.`)
+        );
   } catch (error) {
-    console.error(chalk.red((error as Error).message));
+    console.error(
+      chalk.bold.red("✖. An error occurred: ") +
+        chalk.redBright((error as Error).message)
+    );
   }
 });
 

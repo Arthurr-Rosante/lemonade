@@ -8,21 +8,26 @@ import { CONFIG_FILE, ensureConfigFile } from "../utils/config.js";
 const clean = new Command("clean");
 
 clean.description(
-  `empties the folder by excluding all existing files. If no folder
-   is specified, cleans the ${chalk.inverse(`%temp%`)} folder by default.`
+  `${chalk.hex("00ffb2")(
+    ">_"
+  )} excludes all files in a fodler. Default: ${chalk.greenBright(
+    `%temp%`
+  )} folder.`
 );
 
 // === Path - Argument | Optional ===
 clean.option(
   "-p, --path <folder_path...>",
-  `executes the ${chalk.inverse("clean")} command in the specified folder.`
+  `executes the ${chalk.greenBright("clean")} command in the specified folder.`
 );
 // === Name - Argument | Optional ===
 clean.option(
   "-n, --name <name>",
-  `executes the ${chalk.inverse(
+  `executes the ${chalk.greenBright(
     "clean"
-  )} command in the matching folder set by the ${chalk.inverse("set")} command.`
+  )} command in the matching folder set by the ${chalk.greenBright(
+    "set"
+  )} command.`
 );
 // === Log - Flag | Optional ===
 clean.option("-l, --log", "logs the results of the cleaning operation");
