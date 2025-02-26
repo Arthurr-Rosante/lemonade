@@ -1,38 +1,82 @@
-## Lemonade - cli
+# Lemonade CLI
 
-### Commands/Features
+Lemonade é uma ferramenta de linha de comando (CLI) para gerenciar e limpar pastas temporárias de forma eficiente. Com ela, você pode limpar diretórios específicos, salvar configurações personalizadas e automatizar tarefas de limpeza.
 
-1. **clean**: empties the folder by excluding all existing files. If no folder
-   is specified, cleans the `%temp%` folder by default.
+## Instalação
 
-- **--path, -p [folder_path]**: executes the `clean` command in the specified folder.
-- **--name, -n [name]**: executes the `clean` command in the matching folder set by the `set` command.
-- **--log, -l**: logs the results of the cleaning operation.
+Se o Lemonade CLI estiver publicado como um pacote npm, você pode instalá-lo globalmente com o seguinte comando:
 
----
+```bash
+npm install -g lemonade-cli
+```
 
-2. **add**: adds a configuration that receives a name and can be called by the `clean` command through `lemonade clean -n <name>`
+Se estiver usando yarn ou pnpm, utilize:
 
-- **--name, -n <name> (required!)**: saves the configuration with the specified name.
-- **--path, -p <path> (required!)**: saves the configuration with the specified path.
-- **--default, -D**: saves the configuration as the new default folder called by `lemonade clean`.
+```bash
+yarn global add lemonade-cli
 
----
+pnpm add -g lemonade-cli
+```
 
-3. **remove | rm**: removes a configuration setted by the `set` command.
+Após a instalação, você pode rodar `lemonade --help` para verificar os comandos disponíveis.
 
-- **--name, -n <name> (required!)**: removes the configuration with the specified name.
+## Comandos e Funcionalidades
 
----
+### 1. clean
 
-4. **set**: sets the default configuration to be called by the `lemonade clean` command
+Esvazia a pasta especificada, removendo todos os arquivos existentes. Caso nenhuma pasta seja informada, a limpeza ocorrerá na pasta `%temp%` por padrão.
 
-- **--name, -n <name> (required!)**: sets the configuration with the specified name.
+Opções:
 
----
+`--path, -p <folder_path>`: Define a pasta a ser limpa.
 
-5. **list**: lists saved configurations and shows which one is active.
+`--name, -n <name>`: Usa uma configuração salva para determinar a pasta a ser limpa.
 
-- **--root, -r**: logs the path to the folder containing the configurations.
+`--log, -l`: Registra o resultado da operação de limpeza.
 
----
+### 2. add
+
+Adiciona uma configuração nomeada, permitindo chamar a limpeza posteriormente pelo nome.
+
+Opções:
+
+`--name, -n <name>`: Nome da configuração.
+
+`--path, -p <path>`: Caminho da pasta correspondente.
+
+`--default, -D`: Define a configuração como padrão para o comando lemonade clean.
+
+### 3. remove | rm
+
+Remove uma configuração previamente salva.
+
+Opções:
+
+`--name, -n <name`>: Nome da configuração a ser removida.
+
+### 4. set
+
+Define uma configuração salva como a configuração padrão para o comando lemonade clean.
+
+Opções:
+
+`--name, -n <name>`: Nome da configuração a ser definida como padrão.
+
+### 5. list
+
+Lista todas as configurações salvas e exibe a configuração atualmente definida como padrão.
+
+Opções:
+
+`--root, -r`: Exibe o caminho da pasta onde as configurações estão armazenadas.
+
+### Ajuda
+
+Para mais informações sobre os comandos, utilize:
+
+```bash
+lemonade --help
+lemonade <command> --help
+```
+
+Isso exibirá descrições detalhadas sobre o uso de cada comando e suas opções disponíveis.

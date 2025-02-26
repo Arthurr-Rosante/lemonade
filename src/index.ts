@@ -12,7 +12,7 @@ import set from "./commands/set.js";
 
 const program = new Command(chalk.bold.greenBright("Lemonade CLI"))
   .description(">_ A CLI tool for cleaning temp files and scheduling tasks.")
-  .version("1.0.0", "-v, --version", "Show CLI version");
+  .version("1.0.1", "-v, --version", "Show CLI version");
 
 program.addHelpText(
   "after",
