@@ -62,10 +62,10 @@ clean.action(async function (this: Command) {
     }
 
     const files = await fse.readdir(opts.path as string);
+    console.log(chalk.bold.green("🧹 Cleaning..."));
     for (const file of files) {
       const fpath = path.join(opts.path as string, file);
       try {
-        console.log(chalk.bold.green("🧹 Cleaning..."));
         await fse.remove(fpath);
         status.cleaned.push(fpath);
       } catch (error) {
