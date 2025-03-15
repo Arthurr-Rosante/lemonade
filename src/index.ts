@@ -11,7 +11,7 @@ import remove from "./commands/remove.js";
 import set from "./commands/set.js";
 
 const program = new Command(chalk.bold.greenBright("Lemonade CLI"))
-  .description(">_ A CLI tool for cleaning temp files and scheduling tasks.")
+  .description(">_ A CLI tool for cleaning up files in specified folders.")
   .version("1.0.1", "-v, --version", "Show CLI version");
 
 program.addHelpText(

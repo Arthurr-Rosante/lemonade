@@ -10,7 +10,7 @@ const clean = new Command("clean");
 clean.description(
   `${chalk.hex("00ffb2")(
     ">_"
-  )} excludes all files in a fodler. Default: ${chalk.greenBright(
+  )} excludes all files in a folder. Default: ${chalk.greenBright(
     `%temp%`
   )} folder.`
 );
@@ -65,6 +65,7 @@ clean.action(async function (this: Command) {
     for (const file of files) {
       const fpath = path.join(opts.path as string, file);
       try {
+        console.log(chalk.bold.green("🧹 Cleaning..."));
         await fse.remove(fpath);
         status.cleaned.push(fpath);
       } catch (error) {
